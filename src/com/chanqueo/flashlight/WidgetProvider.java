@@ -19,7 +19,7 @@ public class WidgetProvider extends AppWidgetProvider
 {
     /// Tag used for logs.
     private static final String TAG = "com.chanqueo.flashlight";
-    
+
     /// Intent action raised when widget is clicked.
     private static final String ACTION_CLICKED = "com.chanqueo.flashlight.APPWIDGET_CLICKED";
 
@@ -43,7 +43,7 @@ public class WidgetProvider extends AppWidgetProvider
             camera.setParameters(params);
             //camera.startPreview();
         } catch (Exception exception) {
-            Log.d(TAG, "Exception turning-off flashlight " + exception.getMessage());
+            Log.d(TAG, "Exception turning-on flashlight " + exception.getMessage());
         }
     }
 
@@ -94,8 +94,8 @@ public class WidgetProvider extends AppWidgetProvider
     {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
-            new ComponentName(context, WidgetProvider.class));
+        int[] appWidgetIds =
+            appWidgetManager.getAppWidgetIds(new ComponentName(context, WidgetProvider.class));
 
         for (int i = 0; i < appWidgetIds.length; i++)
             WidgetProvider.updateAppWidget(context, appWidgetManager, appWidgetIds[i]);
@@ -109,10 +109,9 @@ public class WidgetProvider extends AppWidgetProvider
         Log.d(TAG, "onEnabled");
 
         PackageManager pm = context.getPackageManager();
-        pm.setComponentEnabledSetting(
-            new ComponentName(context, WidgetProvider.class),
-            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP);
+        pm.setComponentEnabledSetting(new ComponentName(context, WidgetProvider.class),
+                                      PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                                      PackageManager.DONT_KILL_APP);
     }
 
     /// Called when widgets are asked to be updated.
@@ -139,7 +138,7 @@ public class WidgetProvider extends AppWidgetProvider
         String action = intent.getAction();
 
         if (action.equals(ACTION_CLICKED)) {
-        	if (WidgetProvider.flashligtIsOn())
+            if (WidgetProvider.flashligtIsOn())
                 WidgetProvider.turnOffFlashlight();
             else
                 WidgetProvider.turnOnFlashlight();
@@ -160,9 +159,8 @@ public class WidgetProvider extends AppWidgetProvider
             WidgetProvider.turnOffFlashlight();
 
         PackageManager pm = context.getPackageManager();
-        pm.setComponentEnabledSetting(
-            new ComponentName(context, WidgetProvider.class),
-            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP);
+        pm.setComponentEnabledSetting(new ComponentName(context, WidgetProvider.class),
+                                      PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                                      PackageManager.DONT_KILL_APP);
     }
 }
